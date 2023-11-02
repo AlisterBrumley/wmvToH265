@@ -52,7 +52,7 @@ def overwrite_conf(output_path):
     # evalute or reasks 3 times if incorrect input
     for cnt in range(4):
         if confirm == "o" or confirm == "overwrite":
-            break
+            return
         elif confirm == "s" or confirm == "skip":
             raise FileExistsError
         elif confirm == "a" or confirm == "abort":

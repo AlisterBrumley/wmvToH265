@@ -18,10 +18,17 @@ def prmsn_check(directory):
 
 
 # prompt user for overwrite
-def overwrite_check(output_path):
+def overwrite_check(output_path, args):
     if output_path.is_file():
-        output_path = str(output_path)
-        return overwrite_conf(output_path)
+        if args.overwrite:
+            print("overwrite")
+            return
+        if args.skip:
+            print("skip")
+            raise FileExistsError
+        else:
+            output_path = str(output_path)
+            return overwrite_conf(output_path)
 
 
 # copy to work dir on local disk

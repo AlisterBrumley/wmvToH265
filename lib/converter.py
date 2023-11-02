@@ -22,12 +22,9 @@ def converter(args, video_dir, file_list, work_dir):
             continue
 
         # checking overwrites
-        if not args.overwrite and not args.skip:
-            try:
-                fh.overwrite_check(output_path)
-            except FileExistsError:
-                continue
-        elif args.skip:
+        try:
+            fh.overwrite_check(output_path, args)
+        except FileExistsError:
             continue
 
         # check if local mode and if so copy files
