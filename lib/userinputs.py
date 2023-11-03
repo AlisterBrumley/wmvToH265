@@ -9,7 +9,7 @@ def confirmer(file_list):
         "WARNING: converting a large amount of files and/or long videos"
         + " can take several hours/days and makes heavy use of your cpu!"
     )
-    confirm = input("do you wish to continue? [y/n] ").lower()
+    confirm = input("do you wish to continue? [y/n] ").lower().strip()
 
     # reasks 3 times if incorrect input, otherwise proceeds
     for cnt in range(4):
@@ -22,13 +22,13 @@ def confirmer(file_list):
             if cnt == 3:
                 print("repeated invalid responses: exiting...")
                 sys.exit(1)
-            confirm = input("respond with 'y' or 'n': ").lower()
+            confirm = input("respond with 'y' or 'n': ").lower().strip()
 
 
 # if user keyboard interrupts(ctrl+c), checks if they want to abort all
 def check_abort(interrupted_file):
     print("USER ABORTED CONVERSION ON - " + interrupted_file)
-    confirm = input("do you wish to abort all? [y/n] ").lower()
+    confirm = input("do you wish to abort all? [y/n] ").lower().strip()
 
     # evalute or reasks 3 times if incorrect input
     for cnt in range(4):
@@ -41,13 +41,13 @@ def check_abort(interrupted_file):
             if cnt == 3:
                 print("repeated invalid responses: exiting...")
                 sys.exit(1)
-            confirm = input("respond with 'y' or 'n': ").lower()
+            confirm = input("respond with 'y' or 'n': ").lower().strip()
 
 
 # to run when output file already exists
 def overwrite_conf(output_path):
     print(output_path + " already exists")
-    confirm = input("do you wish to overwrite, skip or abort? [o/s/a] ").lower()
+    confirm = input("do you wish to overwrite, skip or abort? [o/s/a] ").lower().strip()
 
     # evalute or reasks 3 times if incorrect input
     for cnt in range(4):
@@ -62,4 +62,4 @@ def overwrite_conf(output_path):
             if cnt == 3:
                 print("repeated invalid responses: exiting...")
                 sys.exit(1)
-            confirm = input("respond with 'o', 's' or 'a': ").lower()
+            confirm = input("respond with 'o', 's' or 'a': ").lower().strip()

@@ -87,12 +87,7 @@ def arg_parsing():
         action="store_true",
         help="Silence all output, including warnings/errors and automatically skip exisiting files",
     )
-    arg_parse.add_argument(
-        "-S",
-        "--skip",
-        action="store_true",
-        help="Automatically skip existing files"
-    )
+    arg_parse.add_argument("-S", "--skip", action="store_true", help="Automatically skip existing files")
     arg_parse.add_argument("-y", "--yes", action="store_true", help="Automatic yes to confirmation prompt")
 
     # parsing above arguments

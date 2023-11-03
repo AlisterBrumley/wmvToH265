@@ -36,7 +36,7 @@ def __main__():
     if not args.yes:
         confirmer(file_list)
 
-    # create work_dir for logs and local mode
+    # create work_dir directory for logs and local mode
     work_dir = fh.mk_workdir(args)
 
     # check permissions

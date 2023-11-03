@@ -51,8 +51,6 @@ def converter(args, video_dir, file_list, work_dir):
             except KeyboardInterrupt:
                 if not args.reallyquiet:
                     if check_abort(wmv_file.name):
-                        if args.local and not args.log:
-                            fh.rm_work_dir(work_dir)
                         sys.exit(0)
                 else:
                     sys.exit(0)
