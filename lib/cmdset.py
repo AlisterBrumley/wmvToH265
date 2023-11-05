@@ -18,6 +18,7 @@ def cmd_set(args, input_path, conv_file, video_dir):
         "128k",
         str(conv_file),
         "-y",
+        "-nostdin"
     ]
 
     # adding optional args for ffmpeg
