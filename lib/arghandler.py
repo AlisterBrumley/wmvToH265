@@ -70,7 +70,10 @@ def arg_parsing():
         ),
     )
     arg_parse.add_argument(
-        "-q", "--quiet", action="store_true", help="Silence ffmpeg output except errors/warnings/overwrites"
+        "-q",
+        "--quiet",
+        action="store_true",
+        help="Silence ffmpeg output except errors/warnings/overwrites",
     )
     arg_parse.add_argument(
         "-r",
@@ -94,17 +97,27 @@ def arg_parsing():
         help="Iterate through files and create test conversions,"
         + " default length is one minute, starting at the start of the file\n"
         + "format is 'HH:MM:SS'"
-        + " eg. '00:05:00' for 5 minute clip, and '01:02:03' if you want clips starting at 1h2m3s"
+        + " eg. '00:05:00' for 5 minute clip, and '01:02:03' if you want clips starting at 1h2m3s",
     )
-    arg_parse.add_argument("-y", "--yes", action="store_true", help="Automatic yes to confirmation prompt")
+    arg_parse.add_argument(
+        "-y", "--yes", action="store_true", help="Automatic yes to confirmation prompt"
+    )
     arg_parse.add_argument("-L", "--log", action="store_true", help="log ffmpeg output")
     arg_parse.add_argument(
-        "-P", "--progress", action="store_true", help="Re-enable progress output which is disabled by -q/r/s"
+        "-P",
+        "--progress",
+        action="store_true",
+        help="Re-enable progress output which is disabled by -q/r/s",
     )
     arg_parse.add_argument(
-        "-R", "--recursive", action="store_true", help="Include subfolders when finding .wmv files"
+        "-R",
+        "--recursive",
+        action="store_true",
+        help="Include subfolders when finding .wmv files",
     )
-    arg_parse.add_argument("-S", "--skip", action="store_true", help="Automatically skip existing files")
+    arg_parse.add_argument(
+        "-S", "--skip", action="store_true", help="Automatically skip existing files"
+    )
 
     # parsing above arguments
     args = arg_parse.parse_args()
@@ -122,17 +135,19 @@ def test_validation(test_arg_list):
         print("test requires length + time in HH:MM:SS and cannot lead other arguments")
         print("Usage:")
         print(script_name + " -yst")
-        print(script_name + " -t 00:05:00 01:02:3")
-        print(script_name + " --test 00:05:00 01:02:3")
+        print(script_name + " -t 00:05:00 01:02:03")
+        print(script_name + " --test 00:05:00 01:02:03")
         sys.exit(1)
     # making sure args match correct formate
-    elif not all([re.fullmatch(r"\d\d:[0-5]\d:[0-5]\d", entries) for entries in test_arg_list]):
+    elif not all(
+        [re.fullmatch(r"\d\d:[0-5]\d:[0-5]\d", entries) for entries in test_arg_list]
+    ):
         print("incorrect timestamps for test")
         print("test requires length + time in HH:MM:SS and cannot lead other arguments")
         print("Usage:")
         print(script_name + " -yst")
-        print(script_name + " -t 00:05:00 01:02:3")
-        print(script_name + " --test 00:05:00 01:02:3")
+        print(script_name + " -t 00:05:00 01:02:03")
+        print(script_name + " --test 00:05:00 01:02:03")
         sys.exit(1)
     else:
         return test_arg_list
