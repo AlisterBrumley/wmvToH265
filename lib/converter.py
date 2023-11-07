@@ -24,6 +24,7 @@ def converter(args, video_dir, file_list, work_dir):
         # checking overwrites
         try:
             fh.overwrite_check(output_path, args)
+        # using the exception to skip to next
         except FileExistsError:
             continue
 
@@ -41,13 +42,15 @@ def converter(args, video_dir, file_list, work_dir):
             ffmpeg_command = cs.test_set(args, input_path, conv_file)
         else:
             ffmpeg_command = cs.cmd_set(args, input_path, conv_file)
+
+        # pre-setting the shell environment vars
         enviroment_set = os.environ.copy()
         if args.log:
             timecode = dt.now().strftime("-%d%m%y-%H%M%S")
             log_file = Path(work_dir / (wmv_file.name + timecode + ".log"))
             enviroment_set["FFREPORT"] = "file=" + str(log_file)
 
-        # convert
+        # conversion
         if not args.silent:
             try:
                 subprocess.run(ffmpeg_command, check=True, env=enviroment_set)
@@ -70,7 +73,7 @@ def converter(args, video_dir, file_list, work_dir):
         else:
             subprocess.run(ffmpeg_command)
 
-        # copy back if local true
+        # copy converted file back if local true
         if args.local:
             fh.copy_back(conv_file, output_path)
             Path.unlink(conv_file)
