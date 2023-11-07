@@ -1,6 +1,7 @@
 import argparse
 import sys
 import re
+import __main__
 from pathlib import Path
 
 
@@ -114,23 +115,24 @@ def arg_parsing():
 # dealing with test mode
 def test_validation(test_arg_list):
     len_test = len(test_arg_list)
+    script_name = Path(__main__.__file__).name
     if test_arg_list == []:
         return ["00:01:00", "00:00:00"]
     elif len_test != 2:
         print("test requires length + time in HH:MM:SS and cannot lead other arguments")
         print("Usage:")
-        print(sys.argv[0] + " -yst")
-        print(sys.argv[0] + " -t 00:05:00 01:02:3")
-        print(sys.argv[0] + " --test 00:05:00 01:02:3")
+        print(script_name + " -yst")
+        print(script_name + " -t 00:05:00 01:02:3")
+        print(script_name + " --test 00:05:00 01:02:3")
         sys.exit(1)
     # making sure args match correct formate
     elif not all([re.fullmatch(r"\d\d:[0-5]\d:[0-5]\d", entries) for entries in test_arg_list]):
         print("incorrect timestamps for test")
         print("test requires length + time in HH:MM:SS and cannot lead other arguments")
         print("Usage:")
-        print(sys.argv[0] + " -yst")
-        print(sys.argv[0] + " -t 00:05:00 01:02:3")
-        print(sys.argv[0] + " --test 00:05:00 01:02:3")
+        print(script_name + " -yst")
+        print(script_name + " -t 00:05:00 01:02:3")
+        print(script_name + " --test 00:05:00 01:02:3")
         sys.exit(1)
     else:
         return test_arg_list
