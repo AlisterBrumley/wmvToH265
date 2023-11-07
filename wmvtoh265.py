@@ -12,7 +12,7 @@ def __main__():
     args.crf = str(args.crf)
 
     # input validation for test
-    # if --test was flagged with no arguments it returns an empty list
+    # if --test was flagged with no arguments it returns list with defaults
     if args.test is not None:
         args.test = ah.test_validation(args.test)
 
@@ -46,7 +46,8 @@ def __main__():
 
     # check permissions
     fh.prmsn_check(video_dir)
-    fh.prmsn_check(work_dir)
+    if args.log or args.local:
+        fh.prmsn_check(work_dir)
 
     # iterate through files and convert
     converter(args, video_dir, file_list, work_dir)
