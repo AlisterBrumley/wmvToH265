@@ -1,15 +1,20 @@
 import sys
 from pathlib import Path
-from lib.arghandler import arg_parsing
+import lib.arghandler as ah
+import lib.filehandlers as fh
 from lib.converter import converter
 from lib.userinputs import confirmer
-import lib.filehandlers as fh
 
 
 def __main__():
     # dealing with arguments
-    args = arg_parsing()
+    args = ah.arg_parsing()
     args.crf = str(args.crf)
+
+    # input validation for test
+    # if --test was flagged with no arguments it returns an empty list
+    if args.test is not None:
+        args.test = ah.test_validation(args.test)
 
     # args that include others set here
     if args.silent:

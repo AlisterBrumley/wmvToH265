@@ -4,8 +4,8 @@ import subprocess
 from pathlib import Path
 from datetime import datetime as dt
 import lib.filehandlers as fh
+import lib.cmdset as cs
 from lib.userinputs import check_abort
-from lib.cmdset import cmd_set
 
 
 # contains the main converter loop
@@ -37,7 +37,10 @@ def converter(args, video_dir, file_list, work_dir):
             conv_file = output_path
 
         # set command to be used for conversion
-        ffmpeg_command = cmd_set(args, input_path, conv_file, video_dir)
+        if args.test:
+            ffmpeg_command = cs.test_set(args, input_path, conv_file)
+        else:
+            ffmpeg_command = cs.cmd_set(args, input_path, conv_file)
         enviroment_set = os.environ.copy()
         if args.log:
             timecode = dt.now().strftime("-%d%m%y-%H%M%S")
