@@ -37,11 +37,14 @@ def converter(args, video_dir, file_list, work_dir):
             input_path = wmv_file
             conv_file = output_path
 
+        # set temp file to write into
+        temp_file = Path(conv_file).with_suffix(".mp4.part")
+
         # set command to be used for conversion
         if args.test:
-            ffmpeg_command = cs.test_set(args, input_path, conv_file)
+            ffmpeg_command = cs.test_set(args, input_path, temp_file)
         else:
-            ffmpeg_command = cs.cmd_set(args, input_path, conv_file)
+            ffmpeg_command = cs.cmd_set(args, input_path, temp_file)
 
         # pre-setting the shell environment vars
         enviroment_set = os.environ.copy()
@@ -72,6 +75,9 @@ def converter(args, video_dir, file_list, work_dir):
                 print("TO ABORT Ctrl+C or SIGINT")
         else:
             subprocess.run(ffmpeg_command)
+
+        # renaming converted files
+        temp_file.rename(conv_file)
 
         # copy converted file back if local true
         if args.local:

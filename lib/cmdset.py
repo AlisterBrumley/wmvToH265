@@ -16,9 +16,11 @@ def cmd_set(args, input_path, conv_file):
         "aac",
         "-b:a",
         "128k",
+        "-f",
+        "mp4",
         str(conv_file),
         "-y",
-        "-nostdin"
+        "-nostdin",
     ]
 
     # adding optional args for ffmpeg
@@ -42,7 +44,6 @@ def cmd_set(args, input_path, conv_file):
 
 # setting command for test mode
 def test_set(args, input_path, conv_file):
-
     # set vars for readability
     clip_length = args.test[0]
     start_time = args.test[1]
@@ -66,11 +67,13 @@ def test_set(args, input_path, conv_file):
         "aac",
         "-b:a",
         "128k",
+        "-f",
+        "mp4",
         "-t",
         clip_length,
         str(conv_file),
         "-y",
-        "-nostdin"
+        "-nostdin",
     ]
 
     # adding optional args for ffmpeg
