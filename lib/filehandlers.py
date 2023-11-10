@@ -21,10 +21,8 @@ def prmsn_check(directory):
 def overwrite_check(output_path, args):
     if output_path.is_file():
         if args.overwrite:
-            print("overwrite")
             return
         if args.skip:
-            print("skip")
             raise FileExistsError
         else:
             output_path = str(output_path)
