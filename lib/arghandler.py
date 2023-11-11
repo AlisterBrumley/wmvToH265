@@ -20,7 +20,7 @@ def arg_parsing():
         "--crf",
         metavar="int[0, 51]",
         type=int,
-        help=("Set crf value (default: 25)\n" + "Valid values are between 0-51"),
+        help=("set crf value (default: 25)\nvalid values are between 0-51"),
         default=25,
         choices=range(0, 52),
     )
@@ -29,7 +29,7 @@ def arg_parsing():
         "--directory",
         metavar="/directory/str",
         type=str,
-        help="Directory containing wmv files (default: $PWD)",
+        help="directory containing wmv files (default: $PWD)",
         default=Path.cwd(),
     )
     arg_parse.add_argument(
@@ -37,15 +37,15 @@ def arg_parsing():
         "--local",
         action="store_true",
         help=(
-            "Copy and convert files on local disk, then copy back when done.\n"
-            + "Decreases constant small writes on remote drives (external USB, NAS etc)"
+            "copy and convert files on local disk, then copy back when done.\n"
+            + "decreases constant small writes on remote drives (external USB, NAS etc)"
         ),
     )
     arg_parse.add_argument(
         "-o",
         "--overwrite",
         action="store_true",
-        help="Automatically overwrite existing files",
+        help="automatically overwrite existing files",
     )
     arg_parse.add_argument(
         "-p",
@@ -65,28 +65,28 @@ def arg_parsing():
             "veryslow",
         },
         help=(
-            "Set preset value (default: medium)\n"
-            + "Valid presets: ultrafast, superfast, veryfast, faster, fast, medium, slow, slower and veryslow"
+            "set preset value (default: medium)\n"
+            + "valid presets: ultrafast, superfast, veryfast, faster, fast, medium, slow, slower and veryslow"
         ),
     )
     arg_parse.add_argument(
         "-q",
         "--quiet",
         action="store_true",
-        help="Silence ffmpeg output except errors/warnings/overwrites",
+        help="silence ffmpeg output except errors/warnings/overwrites",
     )
     arg_parse.add_argument(
         "-r",
         "--reallyquiet",
         action="store_true",
-        help="Silence all prompts and ffmpeg output except errors/warnings/overwrites (equivalent to -qy)",
+        help="silence all prompts and ffmpeg output except errors/warnings/overwrites (equivalent to -qy)",
     )
 
     arg_parse.add_argument(
         "-s",
         "--silent",
         action="store_true",
-        help="Silence all output, including warnings/errors and automatically skip exisiting files",
+        help="silence all output, including warnings/errors and automatically skip exisiting files",
     )
     arg_parse.add_argument(
         "-t",
@@ -94,7 +94,7 @@ def arg_parsing():
         metavar="length, starttime",
         type=str,
         nargs="*",
-        help="Iterate through files and create test conversions,"
+        help="iterate through files and create test conversions,"
         + " default length is one minute, starting at the start of the file\n"
         + "format is 'HH:MM:SS'"
         + " eg. '00:05:00' for 5 minute clip, and '01:02:03' if you want clips starting at 1h2m3s",
@@ -107,16 +107,16 @@ def arg_parsing():
         "-P",
         "--progress",
         action="store_true",
-        help="Re-enable progress output which is disabled by -q/r/s",
+        help="re-enable progress output which is disabled by -q/r/s",
     )
     arg_parse.add_argument(
         "-R",
         "--recursive",
         action="store_true",
-        help="Include subfolders when finding .wmv files",
+        help="include subfolders when finding .wmv files",
     )
     arg_parse.add_argument(
-        "-S", "--skip", action="store_true", help="Automatically skip existing files"
+        "-S", "--skip", action="store_true", help="automatically skip existing files"
     )
 
     # parsing above arguments
