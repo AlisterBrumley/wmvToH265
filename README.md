@@ -3,9 +3,6 @@
 ### Python script that iterates through files and uses ffmpeg to convert wmv files to H265
 Basically a wrapper around an ffmpeg call, with some useful options and safety checks.
 
-
-### Default ffmpeg command
-
 ### How to use
 #### Basic use
 1. open a terminal or command prompt
