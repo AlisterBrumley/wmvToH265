@@ -70,23 +70,13 @@ def arg_parsing():
         ),
     )
     arg_parse.add_argument(
-        "-q",
-        "--quiet",
-        action="store_true",
-        help="silence ffmpeg output except errors/warnings/overwrites",
-    )
-    arg_parse.add_argument(
         "-r",
-        "--reallyquiet",
+        "--recursive",
         action="store_true",
-        help="silence all prompts and ffmpeg output except errors/warnings/overwrites (equivalent to -qy)",
+        help="include subfolders when finding .wmv files",
     )
-
     arg_parse.add_argument(
-        "-s",
-        "--silent",
-        action="store_true",
-        help="silence all output, including warnings/errors and automatically skip exisiting files",
+        "-s", "--skip", action="store_true", help="automatically skip existing files"
     )
     arg_parse.add_argument(
         "-t",
@@ -107,16 +97,25 @@ def arg_parsing():
         "-P",
         "--progress",
         action="store_true",
-        help="re-enable progress output which is disabled by -q/r/s",
+        help="re-enable progress output which is disabled by -Q/R/S",
+    )
+    arg_parse.add_argument(
+        "-Q",
+        "--quiet",
+        action="store_true",
+        help="silence ffmpeg output except errors/warnings/overwrites",
     )
     arg_parse.add_argument(
         "-R",
-        "--recursive",
+        "--reallyquiet",
         action="store_true",
-        help="include subfolders when finding .wmv files",
+        help="silence all prompts and ffmpeg output except errors/warnings/overwrites (equivalent to -qy)",
     )
     arg_parse.add_argument(
-        "-S", "--skip", action="store_true", help="automatically skip existing files"
+        "-S",
+        "--silent",
+        action="store_true",
+        help="silence all output, including warnings/errors and automatically skip exisiting files",
     )
 
     # parsing above arguments
@@ -127,10 +126,15 @@ def arg_parsing():
 
 # dealing with test mode
 def test_validation(test_arg_list):
+    # set vars to test against
+    re_timeformat = re.compile(r"\d\d:[0-5]\d:[0-5]\d")
     len_test = len(test_arg_list)
     script_name = Path(__main__.__file__).name
+
+    # return default if set with no options
     if test_arg_list == []:
         return ["00:01:00", "00:00:00"]
+    # error if incorrect number of timestamps
     elif len_test != 2:
         print("test requires length + time in HH:MM:SS and cannot lead other arguments")
         print("Usage:")
@@ -138,10 +142,8 @@ def test_validation(test_arg_list):
         print(script_name + " -t 00:05:00 01:02:03")
         print(script_name + " --test 00:05:00 01:02:03")
         sys.exit(1)
-    # making sure args match correct formate
-    elif not all(
-        (re.fullmatch(r"\d\d:[0-5]\d:[0-5]\d", entries) for entries in test_arg_list)
-    ):
+    # making sure args match correct format
+    elif not all((re_timeformat.fullmatch(entries) for entries in test_arg_list)):
         print("incorrect timestamps for test")
         print("test requires length + time in HH:MM:SS and cannot lead other arguments")
         print("Usage:")
@@ -149,5 +151,6 @@ def test_validation(test_arg_list):
         print(script_name + " -t 00:05:00 01:02:03")
         print(script_name + " --test 00:05:00 01:02:03")
         sys.exit(1)
+    # return if all other options met
     else:
         return test_arg_list
