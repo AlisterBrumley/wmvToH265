@@ -136,6 +136,7 @@ def test_validation(test_arg_list):
         return ["00:01:00", "00:00:00"]
     # error if incorrect number of timestamps
     elif len_test != 2:
+        print("missing timestamps for test")
         print("test requires length + time in HH:MM:SS and cannot lead other arguments")
         print("Usage:")
         print(script_name + " -yst")
