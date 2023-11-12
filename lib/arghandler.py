@@ -140,7 +140,7 @@ def test_validation(test_arg_list):
         sys.exit(1)
     # making sure args match correct formate
     elif not all(
-        [re.fullmatch(r"\d\d:[0-5]\d:[0-5]\d", entries) for entries in test_arg_list]
+        (re.fullmatch(r"\d\d:[0-5]\d:[0-5]\d", entries) for entries in test_arg_list)
     ):
         print("incorrect timestamps for test")
         print("test requires length + time in HH:MM:SS and cannot lead other arguments")
