@@ -8,11 +8,11 @@ from lib.userinputs import overwrite_conf
 # check permissions before conversion
 def prmsn_check(directory):
     if not os.access(directory, os.W_OK):
-        print("User doesn't have write permissions for " + directory)
+        print("User doesn't have write permissions for " + str(directory))
         print("Try run with 'sudo' or change permissions")
         sys.exit(1)
     elif not os.access(directory, os.R_OK):
-        print("User doesn't have read permissions for " + directory)
+        print("User doesn't have read permissions for " + str(directory))
         print("Try run with 'sudo' or change permissions")
         sys.exit(1)
 
