@@ -32,6 +32,8 @@ def __main__():
     else:
         file_list = list(video_dir.glob("*.wmv"))
 
+        file_list.sort()
+
     # checking if any wmv files in folder
     if not file_list:
         print("no files detected!")
